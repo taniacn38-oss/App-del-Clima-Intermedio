@@ -1,0 +1,102 @@
+<!doctype html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Clima en Tiempo Real — Visual Crossing</title>
+    <link rel="stylesheet" href="css/styles.css" />
+  </head>
+  <body>
+    <main class="app-container">
+      <header class="app-header">
+        <h1>Pronóstico del Tiempo</h1>
+        <p class="subtitle">
+          Consulta el estado actual y las últimas / próximas 24 horas
+        </p>
+      </header>
+
+      <!-- Barra de búsqueda y refresco -->
+      <form id="search-form" class="search-bar">
+        <input
+          type="text"
+          id="location-input"
+          placeholder="Ej. Sogamoso, Bogotá, Madrid..."
+          aria-label="Ubicación"
+          required
+        />
+        <button type="submit" class="btn btn-primary">Buscar</button>
+        <button
+          type="button"
+          id="refresh-btn"
+          class="btn btn-secondary"
+          title="Refrescar pronóstico"
+        >
+          ↻ Refrescar
+        </button>
+        <button
+          type="button"
+          id="geo-btn"
+          class="btn btn-secondary"
+          title="Usar mi ubicación actual"
+        >
+          📍 Mi ubicación
+        </button>
+      </form>
+
+      <!-- Estado de carga (animación) -->
+      <div id="loading" class="loading hidden" aria-live="polite">
+        <div class="spinner"></div>
+        <p>Cargando datos meteorológicos...</p>
+      </div>
+
+      <!-- Mensajes de error o aviso -->
+      <div id="error-box" class="error-box hidden" role="alert"></div>
+
+      <!-- Contenido principal del clima -->
+      <section id="weather-content" class="weather-content hidden">
+        <div class="current-card">
+          <div class="current-main">
+            <div>
+              <h2 id="city-name">—</h2>
+              <p id="resolved-address" class="muted">—</p>
+              <p id="condition-text" class="condition-badge">—</p>
+            </div>
+            <div class="temp-box">
+              <span id="current-temp" class="temp-value">—°C</span>
+              <span id="feels-like" class="muted">Sensación: —°C</span>
+            </div>
+          </div>
+
+          <div class="metrics-grid">
+            <div class="metric-item">
+              <span class="metric-label">Viento</span>
+              <strong id="wind-speed" class="metric-value">— km/h</strong>
+            </div>
+            <div class="metric-item">
+              <span class="metric-label">Prob. de lluvia</span>
+              <strong id="rain-prob" class="metric-value">—%</strong>
+            </div>
+            <div class="metric-item">
+              <span class="metric-label">Humedad</span>
+              <strong id="humidity" class="metric-value">—%</strong>
+            </div>
+          </div>
+        </div>
+
+        <!-- 24 horas previas -->
+        <div class="hourly-section">
+          <h3>Últimas 24 horas</h3>
+          <div id="past-hours" class="hourly-strip"></div>
+        </div>
+
+        <!-- 24 horas siguientes -->
+        <div class="hourly-section">
+          <h3>Próximas 24 horas</h3>
+          <div id="next-hours" class="hourly-strip"></div>
+        </div>
+      </section>
+    </main>
+
+    <script src="script.js"></script>
+  </body>
+</html>
